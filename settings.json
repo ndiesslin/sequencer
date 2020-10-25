@@ -1,0 +1,31 @@
+
+{
+  "bpm": 140,
+  "steps": 16,
+  "samples": {
+    "kick": {
+      "sequence": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
+      "effects": {
+        "tremolo": 30,
+        "downsample": 2
+      }
+    },
+    "snare": {
+      "sequence": [0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],
+      "effects": {
+        "tremolo": 30,
+        "downsample": 2
+      }
+    },
+    "hihat": {
+      "sequence": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      "effects": {
+        "gain": 1,
+        "downsample": 2,
+        "echo": "0.8 0.9 1000 0.3"
+      }
+    }
+  },
+  "global_effects": {
+  }
+}
