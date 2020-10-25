@@ -1,6 +1,8 @@
 # sequencer
 Python sequencer that runs in your terminal
 
+![Demo playback of sequencer](./documentation/images/demo.gif)
+
 ## Dependencies
 - Python 3
 - sox (for audio processing)
