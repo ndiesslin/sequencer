@@ -1,4 +1,7 @@
 # sequencer
+| :warning: **WARNING**: for the safety of your ears and hardware, please set your volume to low before playing! |
+| --- |
+
 Python sequencer that runs in your terminal
 
 ![Demo playback of sequencer](./documentation/images/demo.gif)
