@@ -2,6 +2,8 @@
 {
   "bpm": 140,
   "steps": 16,
+  "global_effects": {
+  },
   "samples": {
     "kick": {
       "sequence": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
@@ -25,7 +27,5 @@
         "echo": "0.8 0.9 1000 0.3"
       }
     }
-  },
-  "global_effects": {
   }
 }
