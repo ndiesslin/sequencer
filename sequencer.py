@@ -20,7 +20,6 @@ def sequence_runner():
       current_step_samples = player.check_samples(step, samples)
 
       # Play samples in step
-      # NOTE: any benefit to threads here? threading.Thread(target=play_samples(current_step_samples, samples)).start()
       player.play_samples(current_step_samples, samples, settings.global_effects)
 
       # Update settings when changes are made

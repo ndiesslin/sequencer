@@ -14,6 +14,8 @@ def check_samples(step, samples):
   return on_samples
 
 def play_samples(current_step_samples, samples, global_effects):
+  print('Notes playing:')
+  print(current_step_samples)
   for sample in current_step_samples:
     sample_effects_string = controls.sound_effects_to_string(samples.get(sample)['effects'])
     global_effects_string = controls.sound_effects_to_string(global_effects)
