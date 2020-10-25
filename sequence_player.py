@@ -3,6 +3,7 @@ import json
 from utilities.settings import Settings
 from utilities import controls
 from utilities import player
+from utilities import visualizer
 
 # Get settings class
 settings = Settings()
@@ -24,6 +25,9 @@ def sequence_runner():
 
       # Update settings when changes are made
       settings.update_settings()
+
+      # Visualize playback
+      visualizer.print_step(step, settings.steps)
 
       # Time until next step in sequence
       time.sleep(seconds)
