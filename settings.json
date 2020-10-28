@@ -3,29 +3,44 @@
   "bpm": 140,
   "steps": 16,
   "global_effects": {
+    "contrast": "5",
+    "downsample": "1.2"
   },
+  "play_individual_samples": false,
   "samples": {
     "kick": {
       "sequence": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
       "effects": {
-        "tremolo": 30,
-        "downsample": 2
-      }
+      },
+      "volume": "1"
     },
     "snare": {
       "sequence": [0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],
       "effects": {
-        "tremolo": 30,
-        "downsample": 2
-      }
+      },
+      "volume": "1"
     },
     "hihat": {
       "sequence": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
       "effects": {
-        "gain": 1,
-        "downsample": 2,
-        "echo": "0.8 0.9 50 0.2"
-      }
+      },
+      "volume": "1"
+    },
+    "clap": {
+      "sequence": [0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],
+      "effects": {
+        "tempo": "-m 0.45"
+      },
+      "volume": "1"
+    }
+  },
+  "synth": {
+    "enabled": true,
+    "sequence": ["100+200",100,200,100,0,0,"200+150",125,100,0,0,0,250,0,200,100],
+    "type": "square",
+    "volume": "0.15",
+    "effects": {
+      "gain": 1
     }
   }
 }

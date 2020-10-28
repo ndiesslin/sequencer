@@ -5,6 +5,7 @@ def sound_effects_to_string(effects):
   else:
     # Join all effects to string which we apply on play
     effects_string = ''.join('{} {} '.format(key, val) for key, val in effects.items())
+    effects_string += ': '
     return effects_string
 
 def bpm_to_seconds(bpm):

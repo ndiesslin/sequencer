@@ -14,16 +14,15 @@ def sequence_runner():
       # Bpm is set each time to adjust while playing
       seconds = controls.bpm_to_seconds(settings.bpm)
 
-      # Get samples before checking and playing, this allows the check for file reload
-      samples = Settings().samples
+      # Trigger sample play
+      play_step = player.sample_player(step)
+      play_step._process_samples()
 
-      # Get samples in step to play
-      current_step_samples = player.check_samples(step, samples)
+      # Trigger synth play
+      synth_step = player.synth_player(step)
+      synth_step._play_tone()
 
-      # Play samples in step
-      player.play_samples(current_step_samples, samples, settings.global_effects)
-
-      # Update settings when changes are made
+      # Update settings when changes are made, needed to track bpm changes
       settings.update_settings()
 
       # Visualize playback

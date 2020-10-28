@@ -1,7 +1,6 @@
 import os
 import json
 
-# https://stackoverflow.com/questions/54120030/how-can-i-constantly-check-if-a-json-file-is-updated-in-python
 class Settings:
   SETTINGS_FILE = 'settings.json'
 
@@ -23,3 +22,5 @@ class Settings:
       self.steps = range(settings['steps'])
       self.samples = settings['samples']
       self.global_effects = settings['global_effects']
+      self.play_individual_samples = settings['play_individual_samples']
+      self.synth = settings['synth']
