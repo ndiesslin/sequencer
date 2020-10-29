@@ -1,46 +1,127 @@
-
 {
-  "bpm": 140,
-  "steps": 16,
-  "global_effects": {
+  "_bpm": 140,
+  "_global_effects": {
     "contrast": "5",
     "downsample": "1.2"
   },
-  "play_individual_samples": false,
+  "_play_individual_samples": false,
+  "_steps": 16,
   "samples": {
-    "kick": {
-      "sequence": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
-      "effects": {
-      },
-      "volume": "1"
-    },
-    "snare": {
-      "sequence": [0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],
-      "effects": {
-      },
-      "volume": "1"
-    },
-    "hihat": {
-      "sequence": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-      "effects": {
-      },
-      "volume": "1"
-    },
     "clap": {
-      "sequence": [0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],
       "effects": {
         "tempo": "-m 0.45"
       },
+      "sequence": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "volume": "1"
+    },
+    "hihat": {
+      "effects": {},
+      "sequence": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "volume": "1"
+    },
+    "kick": {
+      "effects": {},
+      "sequence": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "volume": "1"
+    },
+    "snare": {
+      "effects": {},
+      "sequence": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
       "volume": "1"
     }
   },
   "synth": {
-    "enabled": true,
-    "sequence": ["100+200",100,200,100,0,0,"200+150",125,100,0,0,0,250,0,200,100],
-    "type": "square",
-    "volume": "0.15",
     "effects": {
       "gain": 1
-    }
+    },
+    "enabled": true,
+    "sequence": [
+      "100+200",
+      100,
+      200,
+      100,
+      0,
+      0,
+      "200+150",
+      125,
+      100,
+      0,
+      0,
+      0,
+      250,
+      0,
+      200,
+      100
+    ],
+    "type": "square",
+    "volume": "0.15"
   }
 }

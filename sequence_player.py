@@ -11,9 +11,6 @@ settings = Settings()
 def sequence_runner():
   while True:
     for step in settings.steps:
-      # Bpm is set each time to adjust while playing
-      seconds = controls.bpm_to_seconds(settings.bpm)
-
       # Trigger sample play
       play_step = player.sample_player(step)
       play_step._process_samples()
@@ -22,11 +19,14 @@ def sequence_runner():
       synth_step = player.synth_player(step)
       synth_step._play_tone()
 
+      # Visualize playback
+      visualizer.print_step(step, settings.steps)
+
       # Update settings when changes are made, needed to track bpm changes
       settings.update_settings()
 
-      # Visualize playback
-      visualizer.print_step(step, settings.steps)
+      # Bpm is set each time to adjust while playing
+      seconds = controls.bpm_to_seconds(settings.bpm)
 
       # Time until next step in sequence
       time.sleep(seconds)

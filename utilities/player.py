@@ -15,7 +15,7 @@ class sample_player:
     # Play samples in step
     self.play_samples()
 
-  # Check samples and return which samples are on
+  # Check samples and return which sapulseaudio -kmples are on
   def check_samples(self):
     step = self.step
     samples = self.settings.samples
@@ -87,6 +87,7 @@ class synth_player:
     self.settings = Settings()
     self.step = step
 
+  # Play synth as long as tempo step
   def tempo_to_playlength(self):
     bpm = self.settings.bpm
     length = 60/bpm/2
@@ -112,4 +113,4 @@ class synth_player:
     effects_string = controls.sound_effects_to_string(effects)
     play_length = self.tempo_to_playlength()
 
-    os.system(f'play -q -V0 -r 44100 -n synth {play_length} {synth_type} {sequence_frequency} vol {volume} {effects_string} {global_effects} &')
+    os.system(f'play -q -V0 -r 44100 -n synth {play_length} {synth_type} {sequence_frequency} vol {volume} {effects_string} {global_effects_string} &')

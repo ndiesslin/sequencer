@@ -18,9 +18,9 @@ class Settings:
       settings = json.load(json_settings)
       self._last_update = os.fstat(json_settings.fileno()).st_mtime
 
-      self.bpm = settings['bpm']
-      self.steps = range(settings['steps'])
+      self.bpm = settings['_bpm']
+      self.global_effects = settings['_global_effects']
+      self.play_individual_samples = settings['_play_individual_samples']
+      self.steps = range(settings['_steps'])
       self.samples = settings['samples']
-      self.global_effects = settings['global_effects']
-      self.play_individual_samples = settings['play_individual_samples']
       self.synth = settings['synth']
