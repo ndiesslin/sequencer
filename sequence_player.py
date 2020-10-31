@@ -11,13 +11,21 @@ settings = Settings()
 def sequence_runner():
   while True:
     for step in settings.steps:
-      # Trigger sample play
-      play_step = player.sample_player(step)
-      play_step._process_samples()
+      # Create playback queue to add our sounds in this step
+      player_queue = player.player_queue()
 
       # Trigger synth play
       synth_step = player.synth_player(step)
-      synth_step._play_tone()
+      player_queue.queue_addition = synth_step._process_synth()
+      player_queue.add_to_queue()
+
+      # Trigger sample play
+      play_step = player.sample_player(step)
+      player_queue.queue_addition = play_step._process_samples()
+      player_queue.add_to_queue()
+
+      # Trigger all sound playback
+      player_queue._play_sounds()
 
       # Visualize playback
       visualizer.print_step(step, settings.steps)

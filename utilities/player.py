@@ -2,20 +2,52 @@ import os
 from utilities import controls
 from utilities.settings import Settings
 
+# Queue to merge all of our sounds together in each step and play
+class player_queue:
+  def __init__(self):
+    # Get settings class
+    self.settings = Settings()
+    # Set initial player queue
+    self.queue = ''
+    self.queue_addition = ''
+    self.merge_sound_counter = 0
+    self.merge = ''
+
+  def _play_sounds(self):
+    self.global_effects_string = controls.sound_effects_to_string(self.settings.global_effects)
+    # Check for merge before triggering sample
+    self.check_merge()
+    # Default buffer is 8192
+    #print(f'sox --buffer 8192 -q -V0 {self.merge} -r 44100 {self.queue} &')
+    os.system(f'sox --buffer 2000 -q -V0 {self.merge} -r 44100 {self.queue} {self.global_effects_string} &')
+
+  def add_to_queue(self):
+    # Check if we need to add a count to our merge
+    if self.queue_addition != '':
+      self.merge_sound_counter += 1
+    # Add to queue, and add a space so we don't clash with other additions to string
+    self.queue += self.queue_addition + ' '
+
+  def check_merge(self):
+    if self.merge_sound_counter >= 2:
+      self.merge = '--combine mix'
+
 class sample_player:
   def __init__(self, step):
     # Get settings class
     self.settings = Settings()
     self.step = step
+    self.sample_string = ''
+    self.current_step_samples = ''
 
   def _process_samples(self):
     # Get current samples
     self.current_step_samples = self.check_samples()
 
-    # Play samples in step
-    self.play_samples()
+    # Return final samples
+    return self.play_samples()
 
-  # Check samples and return which sapulseaudio -kmples are on
+  # Check samples and return which samples are on
   def check_samples(self):
     step = self.step
     samples = self.settings.samples
@@ -29,56 +61,30 @@ class sample_player:
 
     return on_samples
 
-  # Merge samples and play once
-  def play_samples_merged(self):
+  # Merge samples and return once
+  def play_samples(self):
     current_step_samples = self.current_step_samples
     samples = self.settings.samples
-    global_effects = self.settings.global_effects
     merged_samples = ''
 
     for sample in current_step_samples:
+      # It seems as though effects can be added after each sample, if we want them per channel
       sample_volume = samples[sample].get('volume')
       if not sample_volume:
         sample_volume = ''
       else:
-        sample_volume = (f'-v {sample_volume}')
-      merged_samples += (f'{sample_volume} ./samples/{sample}.wav ')
+        sample_volume = f'-v {sample_volume}'
+      sample_effects_string = controls.sound_effects_to_string(samples.get(sample)['effects'])
+      # For some reason the default non pipe works smoother here
+      merged_samples += f'{sample_volume} ./samples/{sample}.wav '
+      #merged_samples += (f'"|sox {sample_volume} ./samples/{sample}.wav -p {sample_effects_string}" ')
 
     merge = ''
     if len(current_step_samples) >= 2:
       merge = '-m'
-
-    global_effects_string = controls.sound_effects_to_string(global_effects)
-    os.system(f'play -q -V0 {merge} {merged_samples} {global_effects_string} &')
-
-  # Loop through all samples and play seperately
-  def play_samples_seperately(self):
-    current_step_samples = self.current_step_samples
-    samples = self.settings.samples
-    global_effects = self.settings.global_effects
-
-    for sample in current_step_samples:
-        sample_volume = samples[sample].get('volume')
-        if not sample_volume:
-          sample_volume = ''
-        else:
-          sample_volume = (f'-v {sample_volume}')
-        sample_effects_string = controls.sound_effects_to_string(samples.get(sample)['effects'])
-        global_effects_string = controls.sound_effects_to_string(global_effects)
-        # Play sound file with sox
-        os.system(f'play -q -V0 {sample_volume} ./samples/{sample}.wav {sample_effects_string} {global_effects_string} &')
-
-  # Play samples
-  def play_samples(self):
-    play_individual_samples = self.settings.play_individual_samples
-
-    # Play samples independently from eachother, allows global effects
-    if play_individual_samples:
-      self.play_samples_seperately()
-
-    else: 
-      # Check if multiple samples then we should merge for playback optimization
-      self.play_samples_merged()
+    
+    # Return sample string
+    return f'{merge} {merged_samples} -d norm -1'
 
 # Trigger synth play each step we may be able to merge with sample play
 class synth_player:
@@ -87,30 +93,32 @@ class synth_player:
     self.settings = Settings()
     self.step = step
 
-  # Play synth as long as tempo step
-  def tempo_to_playlength(self):
-    bpm = self.settings.bpm
-    length = 60/bpm/2
-    length = round(length, 2)
-    return length
-
   # Check if synth is on and play tone
-  def _play_tone(self):
+  def _process_synth(self):
     step = self.step
     synth = self.settings.synth
     enabled = synth.get('enabled')
     sequence_frequency = synth.get('sequence')[step]
 
     # If we have no frequency or not enabled return
-    if sequence_frequency == 0 or enabled != True:
-      return
+    if sequence_frequency == "" or enabled != True:
+      return ''
 
     synth_type = synth.get('type')
     volume = synth.get('volume')
-    global_effects = self.settings.global_effects
-    global_effects_string = controls.sound_effects_to_string(global_effects)
     effects = synth.get('effects')
     effects_string = controls.sound_effects_to_string(effects)
     play_length = self.tempo_to_playlength()
 
-    os.system(f'play -q -V0 -r 44100 -n synth {play_length} {synth_type} {sequence_frequency} vol {volume} {effects_string} {global_effects_string} &')
+    self.play_string = f'"|sox -r 44100 -n -p synth {play_length} {synth_type} {sequence_frequency} vol {volume} {effects_string} norm -15"'
+
+    # Return synth string
+    return self.play_string
+
+  # Play synth as long as tempo step
+  def tempo_to_playlength(self):
+    bpm = self.settings.bpm
+    length = 60/bpm/2
+    length = round(length, 2)
+
+    return length

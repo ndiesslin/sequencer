@@ -8,6 +8,7 @@ Python sequencer that runs in your terminal
 
 ## Dependencies
 - Python 3
+- inquirer (pip3 install inquirer)
 - sox (for audio processing)
 
 ## To run
