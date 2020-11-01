@@ -19,7 +19,7 @@ class player_queue:
     self.check_merge()
     # Default buffer is 8192
     #print(f'sox --buffer 8192 -q -V0 {self.merge} -r 44100 {self.queue} &')
-    os.system(f'sox --buffer 2000 -q -V0 {self.merge} -r 44100 {self.queue} {self.global_effects_string} &')
+    os.system(f'sox --buffer 2000 -q -V0 {self.merge} -r 44100 {self.queue} {self.global_effects_string} remix - &')
 
   def add_to_queue(self):
     # Check if we need to add a count to our merge
@@ -69,15 +69,10 @@ class sample_player:
 
     for sample in current_step_samples:
       # It seems as though effects can be added after each sample, if we want them per channel
-      sample_volume = samples[sample].get('volume')
-      if not sample_volume:
-        sample_volume = ''
-      else:
-        sample_volume = f'-v {sample_volume}'
       sample_effects_string = controls.sound_effects_to_string(samples.get(sample)['effects'])
-      # For some reason the default non pipe works smoother here
-      merged_samples += f'{sample_volume} ./samples/{sample}.wav '
-      #merged_samples += (f'"|sox {sample_volume} ./samples/{sample}.wav -p {sample_effects_string}" ')
+      # For some reason the default non-pipe seems to work smoother here
+      #merged_samples += f'./samples/{sample}.wav '
+      merged_samples += (f'"|sox ./samples/{sample}.wav -p {sample_effects_string}" ')
 
     merge = ''
     if len(current_step_samples) >= 2:
@@ -88,15 +83,16 @@ class sample_player:
 
 # Trigger synth play each step we may be able to merge with sample play
 class synth_player:
-  def __init__(self, step):
+  def __init__(self, synth, step):
     # Get settings class
     self.settings = Settings()
+    self.synth = synth
     self.step = step
 
   # Check if synth is on and play tone
   def _process_synth(self):
     step = self.step
-    synth = self.settings.synth
+    synth = self.synth
     enabled = synth.get('enabled')
     sequence_frequency = synth.get('sequence')[step]
 
@@ -105,12 +101,11 @@ class synth_player:
       return ''
 
     synth_type = synth.get('type')
-    volume = synth.get('volume')
     effects = synth.get('effects')
     effects_string = controls.sound_effects_to_string(effects)
     play_length = self.tempo_to_playlength()
 
-    self.play_string = f'"|sox -r 44100 -n -p synth {play_length} {synth_type} {sequence_frequency} vol {volume} {effects_string} norm -15"'
+    self.play_string = f'"|sox -r 44100 -n -p synth {play_length} {synth_type} {sequence_frequency} {effects_string}"'
 
     # Return synth string
     return self.play_string
@@ -118,7 +113,7 @@ class synth_player:
   # Play synth as long as tempo step
   def tempo_to_playlength(self):
     bpm = self.settings.bpm
-    length = 60/bpm/2
+    length = 60/bpm/self.settings.nth_notes
     length = round(length, 2)
 
     return length

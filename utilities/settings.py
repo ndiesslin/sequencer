@@ -20,6 +20,7 @@ class Settings:
 
       self.bpm = settings['_bpm']
       self.global_effects = settings['_global_effects']
+      self.nth_notes = settings['_nth_notes']
       self.steps = range(settings['_steps'])
+      self.synths = settings['_synths']        
       self.samples = settings['samples']
-      self.synth = settings['synth']

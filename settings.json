@@ -1,14 +1,71 @@
 {
-  "_bpm": 170,
+  "_bpm": 140,
   "_global_effects": {
-    "contrast": "1",
+    "contrast": "2",
     "pitch": "1000"
   },
+  "_nth_notes": 2,
   "_steps": 16,
+  "_synths": {
+    "synth_1": {
+      "effects": {
+        "echo": "0.8 0.2 250 0.2",
+        "echo": "0.5 0.3 450 0.1",
+        "vol": "0.25"
+      },
+      "enabled": true,
+      "sequence": [
+        "100+200",
+        100,
+        200,
+        100,
+        "",
+        "",
+        "200+150",
+        125,
+        "%-15",
+        "",
+        "",
+        "",
+        "A2+G3",
+        "",
+        "D3",
+        "F#3"
+      ],
+      "type": "saw"
+    },
+    "synth_2": {
+      "effects": {
+        "echo": "0.8 0.2 250 0.2",
+        "echo": "0.5 0.3 450 0.1",
+        "vol": "0.15"
+      },
+      "enabled": true,
+      "sequence": [
+        "G4",
+        "G4",
+        "G4",
+        "",
+        "G4",
+        "",
+        "G4",
+        "B4",
+        "G4",
+        "",
+        "B4",
+        "B4",
+        "",
+        "D4",
+        "F4",
+        "F#4"
+      ],
+      "type": "sine"
+    }
+  },
   "samples": {
     "clap": {
       "effects": {
-        "tempo": "-m 0.45"
+        "vol": "1"
       },
       "sequence": [
         0,
@@ -27,11 +84,12 @@
         0,
         1,
         0
-      ],
-      "volume": "0.25"
+      ]
     },
     "hihat": {
-      "effects": {},
+      "effects": {
+        "vol": "1"
+      },
       "sequence": [
         1,
         1,
@@ -49,11 +107,13 @@
         1,
         1,
         1
-      ],
-      "volume": "1"
+      ]
     },
     "kick": {
-      "effects": {},
+      "effects": {
+        "vol": "0.5",
+        "pitch": "-1000"
+      },
       "sequence": [
         1,
         0,
@@ -71,11 +131,13 @@
         0,
         1,
         0
-      ],
-      "volume": "0.25"
+      ]
     },
     "snare": {
-      "effects": {},
+      "effects": {
+        "vol": "1",
+        "pitch": "-1000"
+      },
       "sequence": [
         0,
         0,
@@ -93,37 +155,7 @@
         0,
         1,
         0
-      ],
-      "volume": "0.25"
+      ]
     }
-  },
-  "synth": {
-    "effects": {
-      "gain": 1,
-      "overdrive": 80,
-      "echo": "0.8 0.2 250 0.2",
-      "echo": "0.5 0.3 450 0.1"
-    },
-    "enabled": true,
-    "sequence": [
-      "100+200",
-      100,
-      200,
-      100,
-      "",
-      "",
-      "200+150",
-      125,
-      "%-15",
-      "",
-      "",
-      "",
-      "G3",
-      "",
-      "D3",
-      "F#3"
-    ],
-    "type": "saw",
-    "volume": "0.15"
   }
 }

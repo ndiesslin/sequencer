@@ -14,8 +14,15 @@ def sequence_runner():
       # Create playback queue to add our sounds in this step
       player_queue = player.player_queue()
 
-      # Trigger synth play
-      synth_step = player.synth_player(step)
+      # Trigger synth 1 play
+      synth = settings.synths.get('synth_1')
+      synth_step = player.synth_player(synth, step)
+      player_queue.queue_addition = synth_step._process_synth()
+      player_queue.add_to_queue()
+
+      # Trigger synth 2 play
+      synth = settings.synths.get('synth_2')
+      synth_step = player.synth_player(synth, step)
       player_queue.queue_addition = synth_step._process_synth()
       player_queue.add_to_queue()
 
@@ -34,7 +41,7 @@ def sequence_runner():
       settings.update_settings()
 
       # Bpm is set each time to adjust while playing
-      seconds = controls.bpm_to_seconds(settings.bpm)
+      seconds = controls.bpm_to_seconds(settings.bpm, settings.nth_notes)
 
       # Time until next step in sequence
       time.sleep(seconds)

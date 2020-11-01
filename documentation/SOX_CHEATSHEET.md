@@ -1,4 +1,10 @@
-# Cheat sheet with different sox playback combinations
+# Cheat sheet with different SoX playback combinations
+
+## SoX documentation and resources:
+[SoX Main website](http://sox.sourceforge.net/sox.html)
+[man SoX](https://linux.die.net/man/1/sox)
+
+## [SoX Cheatsheet](./documentation/SOX_CHEATSHEET.md)
 
 ## Sox (play) merged sample and audio playback
 play -m -r 44100 "|sox -r 44100 -n -p synth 1 trapezium %1" "|sox -r 44100 -n -p synth 1 trapezium %3" ./samples/snare.wav ./samples/kick.wav

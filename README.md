@@ -23,4 +23,6 @@ Python sequencer that runs in your terminal
 ## Sound effects
 All sound effects are based on sox [checkout the sox documentation for more info](http://sox.sourceforge.net/sox.html)
 
+## [SoX Cheatsheet](./documentation/SOX_CHEATSHEET.md)
+
 ## [Future updates](./documentation/FUTURE_FEATURES.md)
