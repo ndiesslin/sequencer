@@ -18,7 +18,7 @@ class player_queue:
     # Check for merge before triggering sample
     self.check_merge()
     # Default buffer is 8192
-    os.system(f'sox --buffer 2000 -q -V0 {self.merge} -r 44100 {self.queue} {self.global_effects_string} remix - &')
+    os.system(f'sox --buffer 10000 -q -V0 {self.merge} -r 44100 {self.queue} {self.global_effects_string} remix - &')
 
   def add_to_queue(self):
     # Check if we need to add a count to our merge
@@ -67,11 +67,20 @@ class sample_player:
     merged_samples = ''
 
     for sample in current_step_samples:
+      # Get volume from our sample effects settings
+      sample_volume = samples.get(sample)['effects'].get('vol')
+      if not sample_volume:
+        sample_volume = ''
+      else:
+        sample_volume = f'-v {sample_volume}'
+      
+      merged_samples += f'{sample_volume} ./samples/{sample}.wav '
+
+      # For some reason the default non-pipe seems to play back faster, I believe there is some delay due to the pipe method's output speed
+      # Sadly this currently means if you want per sample effects you need to enable the slower piping method. It still is fun to play with!
       # It seems as though effects can be added after each sample, if we want them per channel
-      sample_effects_string = controls.sound_effects_to_string(samples.get(sample)['effects'])
-      # For some reason the default non-pipe seems to work smoother here
-      #merged_samples += f'./samples/{sample}.wav '
-      merged_samples += (f'"|sox ./samples/{sample}.wav -p {sample_effects_string}" ')
+      #sample_effects_string = controls.sound_effects_to_string(samples.get(sample)['effects'])
+      #merged_samples += (f'"|sox ./samples/{sample}.wav -p {sample_effects_string}" ')
 
     merge = ''
     if len(current_step_samples) >= 2:

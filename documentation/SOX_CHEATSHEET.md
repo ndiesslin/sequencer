@@ -29,3 +29,19 @@ sox -n -n synth 6 tri 10k:14k spectrogram -z 100 -w kaiser
 
 ## Play samples with their own effects and global effects
 sox --combine mix "|sox -v 1 ./samples/snare.wav -p overdrive 80" "|sox -v 0.2 ./samples/kick.wav -p overdrive 10" -d overdrive 80
+
+## NOTE: When piping the sox sample data it takes longer to process than combining samples together
+time sox --combine mix "|sox ./samples/snare.wav -p" "|sox ./samples/kick.wav -p" -d overdrive 80
+0.03s user 0.03s system 7% cpu 0.741 total
+
+time sox --combine mix ./samples/snare.wav ./samples/kick.wav -d overdrive 80
+0.01s user 0.02s system 4% cpu 0.707 total
+
+---
+Using mp3 files
+
+time sox --combine mix "|sox ./samples/snare.mp3 -p" "|sox ./samples/kick.mp3 -p" -d overdrive 80
+0.04s user 0.04s system 10% cpu 0.727 total
+
+time sox --combine mix ./samples/snare.mp3 ./samples/kick.mp3 -d overdrive 80
+0.02s user 0.02s system 5% cpu 0.676 total
