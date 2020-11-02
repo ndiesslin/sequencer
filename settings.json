@@ -2,7 +2,9 @@
   "_bpm": 140,
   "_global_effects": {
     "contrast": "2",
-    "pitch": "1000"
+    "pitch": "1000",
+    "speed": "1",
+    "stretch": "1"
   },
   "_nth_notes": 2,
   "_steps": 16,
@@ -11,7 +13,8 @@
       "effects": {
         "echo": "0.8 0.2 250 0.2",
         "echo": "0.5 0.3 450 0.1",
-        "vol": "0.25"
+        "vol": "0.25",
+        "tremolo": "10 40"
       },
       "enabled": true,
       "sequence": [

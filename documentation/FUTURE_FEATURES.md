@@ -8,3 +8,5 @@
   - [ ] profile code for any performance gains using cProfile
 - [x] bass step synth using sox synth
 - [ ] Add ability to create patterns with multiple sequences
+- [ ] record sequence to output
+- [ ] test piping entire sequence to output
