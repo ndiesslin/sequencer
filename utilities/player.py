@@ -18,7 +18,6 @@ class player_queue:
     # Check for merge before triggering sample
     self.check_merge()
     # Default buffer is 8192
-    #print(f'sox --buffer 8192 -q -V0 {self.merge} -r 44100 {self.queue} &')
     os.system(f'sox --buffer 2000 -q -V0 {self.merge} -r 44100 {self.queue} {self.global_effects_string} remix - &')
 
   def add_to_queue(self):
