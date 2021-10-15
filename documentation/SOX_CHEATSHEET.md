@@ -45,3 +45,13 @@ time sox --combine mix "|sox ./samples/snare.mp3 -p" "|sox ./samples/kick.mp3 -p
 
 time sox --combine mix ./samples/snare.mp3 ./samples/kick.mp3 -d overdrive 80
 0.02s user 0.02s system 5% cpu 0.676 total
+
+sox ./samples/joey.wav -d trim 0 1
+
+sox --combine mix "|sox ./samples/joey.wav -d -p trim 0 0.1" "|sox -v 1 ./samples/snare.wav -p overdrive 80" "|sox -v 0.2 ./samples/kick.wav -p overdrive 10" -d overdrive 80
+
+time sox --combine mix "|sox ./samples/snare.mp3 -p trim 0 0.05" "|sox ./samples/kick.mp3 -p trim 0 0.05" -d overdrive 2
+0.02s user 0.03s system 36% cpu 0.134 total
+
+time sox --combine mix ./samples/snare.mp3 ./samples/kick.mp3 -d overdrive 2
+0.01s user 0.02s system 7% cpu 0.413 total
