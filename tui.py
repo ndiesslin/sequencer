@@ -7,7 +7,12 @@ import sys
 import re
 
 # Connect to sequencer
-from sequence_player import sequence_runner, settings
+# Connect to sequencer
+from sequence_player import sequence_runner
+from utilities.settings import Settings
+
+# Initialize settings
+settings = Settings()
 
 # Track definitions for the grid
 TRACKS = [
@@ -65,9 +70,21 @@ def draw_header(stdscr, width, view_mode, msg=""):
     title = f" SEQUENCER TUI - {view_mode} VIEW "
     if msg: title += f" [{msg}] "
     
+    # Pattern Status
+    # P: 1 (Green)  E: 2 (Yellow)  Q: 3 (Blink)
+    pat_str = " PATTERNS: "
+    for i in range(1, 5):
+        s = f"[{i}]"
+        if settings.playing_pattern_idx == i: s += "P"
+        if settings.editing_pattern_idx == i: s += "E"
+        if settings.queued_pattern_idx == i: s += "Q"
+        pat_str += s + " "
+    
     stdscr.attron(curses.color_pair(1) | curses.A_BOLD)
     stdscr.addstr(0, 0, title.center(width))
     stdscr.attroff(curses.color_pair(1) | curses.A_BOLD)
+    
+    stdscr.addstr(0, 0, pat_str)
 
 def draw_controls(stdscr, row, width, view_mode):
     # Draw control hints
@@ -88,6 +105,17 @@ def draw_controls(stdscr, row, width, view_mode):
     stdscr.addstr(row + 2, 2, efx_str)
 
 def draw_grid(stdscr, start_row, cursor_row, cursor_col, current_step):
+    # Draw Beat Markers (One row above)
+    # Beats 1, 2, 3, 4
+    beat_row = start_row - 1
+    for b in range(4):
+        step_idx = b * 4
+        # Calculate start x of this group
+        group_x = 12 + (step_idx * 5) + (b * 2) 
+        # Center "Beat X" roughly in the 20-char wide group (4 steps * 5)
+        # 10 chars in is center.
+        stdscr.addstr(beat_row, group_x + 9, str(b+1), curses.color_pair(4) | curses.A_BOLD)
+
     # Draw tracks
     for t_idx, track in enumerate(TRACKS):
         row = start_row + t_idx
@@ -109,12 +137,13 @@ def draw_grid(stdscr, start_row, cursor_row, cursor_col, current_step):
         if t_idx == cursor_row:
             stdscr.attroff(curses.A_REVERSE)
             
-        # Steps
         # Get sequence data
+        # USE EDITING PATTERN
+        editing_pattern = settings.get_editing_pattern()
         if track['type'] == 'synth':
-            seq = settings.synths[track['key']]['sequence']
+            seq = editing_pattern['synths'][track['key']]['sequence']
         else:
-            seq = settings.samples[track['key']]['sequence']
+            seq = editing_pattern['samples'][track['key']]['sequence']
             
         # Draw steps
         for step in range(16): # Assuming 16 steps max for now
@@ -125,7 +154,9 @@ def draw_grid(stdscr, start_row, cursor_row, cursor_col, current_step):
             is_cursor = (t_idx == cursor_row and step == cursor_col)
             
             # Widen grid for notes (5 chars per step)
-            x_pos = 12 + (step * 5)
+            # Add spacing interval every 4 steps (visual grouping)
+            group_offset = (step // 4) * 2
+            x_pos = 12 + (step * 5) + group_offset
             
             symbol = "[   ]"
             
@@ -174,12 +205,13 @@ def draw_mixer(stdscr, start_row, cursor_row, cursor_col):
         
         stdscr.addstr(row, 2, label.center(10))
         
-        # Get Config
+        # Get Config (EDITING PATTERN)
+        editing_pattern = settings.get_editing_pattern()
         if track['type'] == 'synth':
-            config = settings.synths[track['key']]
+            config = editing_pattern['synths'][track['key']]
             effects = config.get('effects', {})
         else:
-            config = settings.samples[track['key']]
+            config = editing_pattern['samples'][track['key']]
             effects = config.get('effects', {})
             
         # Draw Params
@@ -238,12 +270,14 @@ def draw_mixer(stdscr, start_row, cursor_row, cursor_col):
 
 def toggle_step(track_idx, step_idx):
     track = TRACKS[track_idx]
+    editing_pattern = settings.get_editing_pattern()
+    
     if track['type'] == 'sample':
-        seq = settings.samples[track['key']]['sequence']
+        seq = editing_pattern['samples'][track['key']]['sequence']
         # Toggle 0/1
         seq[step_idx] = 1 if seq[step_idx] == 0 else 0
     else:
-        seq = settings.synths[track['key']]['sequence']
+        seq = editing_pattern['synths'][track['key']]['sequence']
         # Toggle Note/Empty
         if seq[step_idx] == "":
             seq[step_idx] = "C3"
@@ -254,7 +288,8 @@ def adjust_note(track_idx, step_idx, semitones):
     track = TRACKS[track_idx]
     if track['type'] != 'synth': return
     
-    seq = settings.synths[track['key']]['sequence']
+    editing_pattern = settings.get_editing_pattern()
+    seq = editing_pattern['synths'][track['key']]['sequence']
     current = seq[step_idx]
     if current == "":
         seq[step_idx] = "C3"
@@ -277,13 +312,15 @@ def adjust_mixer_param(track_idx, param_idx, direction):
     param = MIXER_PARAMS[param_idx]
     key = param['key']
     
-    # Get Dicts
+    # Get Dicts (EDITING PATTERN)
+    editing_pattern = settings.get_editing_pattern()
+    
     if track['type'] == 'synth':
-        config = settings.synths[track['key']]
+        config = editing_pattern['synths'][track['key']]
         if 'effects' not in config: config['effects'] = {}
         effects = config['effects']
     else:
-        config = settings.samples[track['key']]
+        config = editing_pattern['samples'][track['key']]
         if 'effects' not in config: config['effects'] = {}
         effects = config['effects']
     
@@ -380,7 +417,7 @@ def main(stdscr):
     # Start Audio Thread
     audio_thread = threading.Thread(
         target=sequence_runner,
-        args=(stop_event, ui_queue),
+        args=(stop_event, ui_queue, settings),
         daemon=True
     )
     audio_thread.start()
@@ -429,6 +466,12 @@ def main(stdscr):
             
             # Input
             key = stdscr.getch()
+            
+            # Debug Key
+            if key != -1:
+                with open("key_log.txt", "a") as kf:
+                    kf.write(f"Key pressed: {key}\n")
+            
             
             if key == ord('q'):
                 break
@@ -493,6 +536,23 @@ def main(stdscr):
             elif key == ord('a'):
                 s = settings.global_effects.get('speed', '1')
                 settings.global_effects['speed'] = format_effect_val(s, -0.1)
+                
+            # PATTERN CONTROLS
+            elif key in [ord('1'), ord('2'), ord('3'), ord('4')]:
+                pat_idx = int(chr(key))
+                settings.editing_pattern_idx = pat_idx
+                flash_msg = f"EDITING PATTERN {pat_idx}"
+                flash_timer = time.time() + 1
+            
+            elif key in [10, 13, curses.KEY_ENTER]: # ENTER -> Queue
+                 settings.queued_pattern_idx = settings.editing_pattern_idx
+                 flash_msg = f"QUEUED PATTERN {settings.editing_pattern_idx}"
+                 flash_timer = time.time() + 2
+                 
+            elif key in [127, curses.KEY_BACKSPACE]: # Backspace -> Clear
+                 settings.clear_editing_pattern()
+                 flash_msg = f"PATTERN {settings.editing_pattern_idx} CLEARED"
+                 flash_timer = time.time() + 2
             
     except KeyboardInterrupt:
         pass

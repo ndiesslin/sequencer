@@ -1,28 +1,27 @@
 # Sequencer Project Context
 
 ## 📝 Project Overview
-A terminal-based Python step sequencer that plays audio using `sox` (Sound eXchange). It supports synthesized tones and sample playback, configurable via a JSON file.
+A terminal-based Python step sequencer (TUI) that plays audio using `PyAudio` and `numpy`. It features a 16-step grid, real-time synthesis, sample playback, and a pattern management system.
 
 ## 🛠️ Tech Stack
 -   **Language**: Python 3
--   **Audio Backend**: `sox` (via command line)
+-   **Audio Engine**: `PyAudio` + `numpy` (Continuous stream, low latency)
+-   **Interface**: `curses` (Terminal UI)
 -   **Configuration**: JSON (`settings.json`)
 
-
 ## 📂 Core Architecture
--   **`settings.json`**: Defines BPM, synth patterns, sample patterns, and effects.
+-   **`tui.py`**: Main entry point. Handles user input, drawing, and thread coordination.
+-   **`sequence_player.py`**: Audio thread runner. Manages playback loop and timing.
+-   **`utilities/audio_engine.py`**: Persistent audio stream handler.
+-   **`utilities/settings.py`**: Manages state, persistence, and pattern migration.
 
-## 🧱 Key Patterns & Limitations
--   **Process-Based Audio**: Each step spawns a new `sox` process via `os.system`. This introduces significant overhead and latency.
--   **Blocking Timing**: Uses `time.sleep()` for sequencing, which is subject to drift and OS scheduling jitter.
--   **Hot Reloading**: Checks file modification time of `settings.json` on every step, adding I/O overhead.
+## 🧱 Key Patterns
+-   **Dual-Threaded**: TUI runs in main thread; Audio runs in a daemon thread.
+-   **Shared State**: Both threads read/write to a shared `Settings` instance.
+-   **Pattern Queuing**: Supports 4 patterns. Changes can be queued to switch at the end of a loop.
 
 ## 🚀 Improvement Opportunities
--   **Performance**: 
-    -   Replace `os.system` with `subprocess.Popen` to avoid shell overhead.
-    -   Implement drift-correcting timer loop.
-    -   Optimize `settings.json` reloading.
 -   **Features**:
-    -   **Swing/Groove**: Add rhythmic variation.
-    -   **TUI**: Real-time control interface.
     -   **Probability**: Random chance for steps to trigger.
+    -   **More Effects**: Reverb, Distortion, Filters.
+    -   **Export**: Render pattern to WAV file.

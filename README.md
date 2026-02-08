@@ -9,25 +9,26 @@ A terminal-based music sequencer built in Python. Edit patterns, tweak effects, 
 ## ✨ Interface Preview
 
 ```
-                         SEQUENCER TUI - SEQUENCER VIEW
-
-  Synth 1   [100][ C3][200][100][   ][C#2][200][125][%-1][   ][ E2][   ][A2+][   ][ D3][F#3]
-  Synth 2   [ G4][ G4][ G4][   ][ G4][ C3][ G4][ B4][ G4][   ][ B4][ B4][   ][ D4][ F4][F#4]
-  Kick      [ █ ][ █ ][ █ ][   ][   ][ █ ][ █ ][   ][ █ ][   ][ █ ][   ][ █ ][   ][ █ ][   ]
-  Snare     [   ][   ][ █ ][   ][   ][   ][ █ ][   ][   ][   ][ █ ][   ][   ][   ][ █ ][   ]
-  Hi-Hat    [ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ][ █ ]
+ PATTERNS: [1]P [2]EQ [3] [4]                             SEQUENCER TUI - SEQUENCER VIEW
+                     1                     2                     3                     4
+  Synth 1   [   ][   ][   ][   ]  [   ][   ][   ][   ]  [   ][   ][   ][   ]  [   ][   ][   ][   ]
+  Synth 2   [   ][   ][   ][   ]  [   ][   ][   ][   ]  [   ][   ][   ][   ]  [   ][   ][   ][   ]
+  Kick      [ █ ][   ][ █ ][   ]  [ █ ][ █ ][   ][   ]  [ █ ][   ][ █ ][ █ ]  [ █ ][   ][   ][   ]
+  Snare     [   ][   ][   ][   ]  [ █ ][   ][   ][   ]  [   ][   ][   ][   ]  [ █ ][   ][   ][   ]
+  Hi-Hat    [ █ ][ █ ][ █ ][ █ ]  [   ][   ][ █ ][ █ ]  [ █ ][   ][ █ ][   ]  [ █ ][   ][ █ ][   ]
 
   ARROWS: Move | SPACE: Toggle | [ / ]: Note | TAB: Mixer | S: Save | M/L: Mute/Solo | Q: Quit
-  BPM: 95 (+/-) | Swing: 0.50
-  Global Pitch: -700c (W/S) | Speed: 5.9x (A/D)
+  BPM: 100 (+/-) | Swing: 0.50
+  Global Pitch: -700c (W/S) | Speed: 1.0x (A/D)
 ```
 
 ---
 
 ## Dependencies
 - Python 3
-- inquirer (pip3 install inquirer)
-- sox (for audio processing)
+- `pyaudio` (Low-latency audio)
+- `numpy` (DSP effects)
+- `curses` (Standard library)
 
 ## Usage
 
@@ -38,6 +39,11 @@ python3 tui.py
 
 ### Controls
 ## 🎛 Controls
+
+### 🎹 Patterns (New!)
+*   **Switch Editing View**: `1` `2` `3` `4` (Switch between patterns 1-4)
+*   **Queue Pattern**: `ENTER` (Queues currently editing pattern to play next)
+*   **Clear Pattern**: `BACKSPACE` (Clears all notes in current pattern)
 
 ### 🎹 Sequencer View
 *   **Navigation**: `ARROWS` to move cursor.

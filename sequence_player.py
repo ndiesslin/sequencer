@@ -5,14 +5,15 @@ from utilities import controls
 from utilities import player
 from utilities import visualizer
 
-# Get settings class
-settings = Settings()
+# If running as script, use local. If imported, use passed.
+local_settings = Settings()
 
 from utilities.audio_engine import AudioEngine
 
-from utilities.audio_engine import AudioEngine
-
-def sequence_runner(stop_event=None, ui_queue=None):
+def sequence_runner(stop_event=None, ui_queue=None, settings=None):
+  # Use passed settings or fallback to local
+  if settings is None:
+      settings = local_settings
   # Initialize Audio Engine
   # Start with standard sample rate
   try:
@@ -99,6 +100,14 @@ def sequence_runner(stop_event=None, ui_queue=None):
             
           # Advance target time
           next_wake_time += actual_duration
+          
+          # QUEUE LOGIC: If we are at the last step, switch pattern for next loop
+          if step == len(current_steps) - 1:
+              if settings.queued_pattern_idx is not None:
+                 with open("pattern_debug.log", "a") as f:
+                     f.write(f"SWITCHING to {settings.queued_pattern_idx}\n")
+                 settings.playing_pattern_idx = settings.queued_pattern_idx
+                 settings.queued_pattern_idx = None
           
           # Sleep until target time
           sleep_time = next_wake_time - time.perf_counter()
