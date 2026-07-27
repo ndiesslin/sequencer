@@ -14,14 +14,18 @@ from utilities.settings import Settings
 # Initialize settings
 settings = Settings()
 
-# Track definitions for the grid
-TRACKS = [
-    {'type': 'synth', 'key': 'synth_1', 'label': 'Synth 1'},
-    {'type': 'synth', 'key': 'synth_2', 'label': 'Synth 2'},
-    {'type': 'sample', 'key': 'kick', 'label': 'Kick   '},
-    {'type': 'sample', 'key': 'snare', 'label': 'Snare  '},
-    {'type': 'sample', 'key': 'hihat', 'label': 'Hi-Hat '},
-]
+TRACKS = []
+
+def refresh_tracks():
+    """Build the UI from the selected pattern, including user-added samples."""
+    global TRACKS
+    pattern = settings.get_editing_pattern()
+    TRACKS = ([{'type': 'synth', 'key': key, 'label': key.replace('_', ' ').title()}
+               for key in pattern['synths']] +
+              [{'type': 'sample', 'key': key, 'label': key.replace('_', ' ').title()}
+               for key in pattern['samples']])
+
+refresh_tracks()
 
 # Mixer Parameters definition
 # (Label, key in effects dict, step size)
@@ -73,12 +77,14 @@ def draw_header(stdscr, width, view_mode, msg=""):
     # Pattern Status
     # P: 1 (Green)  E: 2 (Yellow)  Q: 3 (Blink)
     pat_str = " PATTERNS: "
-    for i in range(1, 5):
+    for i in sorted(settings.patterns):
         s = f"[{i}]"
         if settings.playing_pattern_idx == i: s += "P"
         if settings.editing_pattern_idx == i: s += "E"
         if settings.queued_pattern_idx == i: s += "Q"
         pat_str += s + " "
+    if settings.song_mode:
+        pat_str += " SONG: " + "-".join(map(str, settings.song_chain))
     
     stdscr.attron(curses.color_pair(1) | curses.A_BOLD)
     stdscr.addstr(0, 0, title.center(width))
@@ -89,9 +95,9 @@ def draw_header(stdscr, width, view_mode, msg=""):
 def draw_controls(stdscr, row, width, view_mode):
     # Draw control hints
     if view_mode == "SEQUENCER":
-        hints = "ARROWS: Move | SPACE: Toggle | [ / ]: Note | TAB: Mixer | S: Save | M/L: Mute/Solo | Q: Quit"
+        hints = "SPACE: Toggle | [/] Note | p/o Prob | v/b Vel | x Song | j/k Chain | C/V Copy/Paste"
     else:
-        hints = "ARROWS: Move | [ / ]: Adjust | TAB: Sequencer | S: Save | M/L: Mute/Solo | Q: Quit"
+        hints = "[/] Adjust | R: Record Vol/Pitch at playhead | Backspace: Clear point | X Song | J/K Chain"
         
     stdscr.addstr(row, 2, hints, curses.color_pair(4))
     
@@ -108,7 +114,7 @@ def draw_grid(stdscr, start_row, cursor_row, cursor_col, current_step):
     # Draw Beat Markers (One row above)
     # Beats 1, 2, 3, 4
     beat_row = start_row - 1
-    for b in range(4):
+    for b in range((settings.step_count + 3) // 4):
         step_idx = b * 4
         # Calculate start x of this group
         group_x = 12 + (step_idx * 5) + (b * 2) 
@@ -146,7 +152,7 @@ def draw_grid(stdscr, start_row, cursor_row, cursor_col, current_step):
             seq = editing_pattern['samples'][track['key']]['sequence']
             
         # Draw steps
-        for step in range(16): # Assuming 16 steps max for now
+        for step in range(settings.step_count):
             val = seq[step]
             
             # Check if active (playing)
@@ -445,6 +451,9 @@ def main(stdscr):
                 current_step = latest['step']
                 total_steps = latest['total_steps']
                 
+            refresh_tracks()
+            cursor_row = min(cursor_row, max(0, len(TRACKS) - 1))
+            cursor_col = min(cursor_col, max(0, settings.step_count - 1))
             # Draw UI
             height, width = stdscr.getmaxyx()
             stdscr.erase()
@@ -466,12 +475,6 @@ def main(stdscr):
             
             # Input
             key = stdscr.getch()
-            
-            # Debug Key
-            if key != -1:
-                with open("key_log.txt", "a") as kf:
-                    kf.write(f"Key pressed: {key}\n")
-            
             
             if key == ord('q'):
                 break
@@ -514,11 +517,40 @@ def main(stdscr):
                     adjust_note(cursor_row, cursor_col, 12)
                 elif key == ord('{'): 
                     adjust_note(cursor_row, cursor_col, -12)
+                elif key == ord('p'):
+                    value = settings.cycle_step_parameter(TRACKS[cursor_row]['key'], cursor_col,
+                                                          'probability', [1.0, 0.75, 0.5, 0.25])
+                    flash_msg, flash_timer = f"PROBABILITY {value:.0%}", time.time() + 1
+                elif key == ord('o'):
+                    value = settings.cycle_step_parameter(TRACKS[cursor_row]['key'], cursor_col,
+                                                          'probability', [0.25, 0.5, 0.75, 1.0])
+                    flash_msg, flash_timer = f"PROBABILITY {value:.0%}", time.time() + 1
+                elif key == ord('v'):
+                    value = settings.cycle_step_parameter(TRACKS[cursor_row]['key'], cursor_col,
+                                                          'velocity', [1.0, 0.75, 0.5, 1.25])
+                    flash_msg, flash_timer = f"VELOCITY {value:.0%}", time.time() + 1
+                elif key == ord('b'):
+                    value = settings.cycle_step_parameter(TRACKS[cursor_row]['key'], cursor_col,
+                                                          'velocity', [1.25, 0.5, 0.75, 1.0])
+                    flash_msg, flash_timer = f"VELOCITY {value:.0%}", time.time() + 1
             else: # MIXER
                 if key == ord(']'):
                     adjust_mixer_param(cursor_row, cursor_col, 1)
                 elif key == ord('['):
                     adjust_mixer_param(cursor_row, cursor_col, -1)
+                elif key == ord('r') and current_step >= 0:
+                    effect = MIXER_PARAMS[cursor_col]['key']
+                    if effect in ('vol', 'pitch'):
+                        value = settings.toggle_track_automation(TRACKS[cursor_row]['key'], effect, current_step)
+                        flash_msg = f"REC {effect.upper()}={value}" if value is not None else "AUTOMATION CLEARED"
+                    else:
+                        flash_msg = "AUTOMATE VOL OR PITCH"
+                    flash_timer = time.time() + 2
+                elif key in [127, curses.KEY_BACKSPACE] and current_step >= 0:
+                    effect = MIXER_PARAMS[cursor_col]['key']
+                    if effect in ('vol', 'pitch'):
+                        settings.clear_track_automation(TRACKS[cursor_row]['key'], effect, current_step)
+                        flash_msg, flash_timer = "AUTOMATION CLEARED", time.time() + 2
                     
             # Global
             if key == ord('='): settings.bpm += 5
@@ -535,21 +567,45 @@ def main(stdscr):
                 settings.global_effects['speed'] = format_effect_val(s, 0.1)
             elif key == ord('a'):
                 s = settings.global_effects.get('speed', '1')
-                settings.global_effects['speed'] = format_effect_val(s, -0.1)
+                try:
+                    settings.global_effects['speed'] = str(round(max(0.1, float(s) - 0.1), 2))
+                except ValueError:
+                    settings.global_effects['speed'] = '1.0'
                 
             # PATTERN CONTROLS
-            elif key in [ord('1'), ord('2'), ord('3'), ord('4')]:
+            elif key == ord('R'):
+                settings.reload()
+                refresh_tracks()
+                flash_msg = "RELOADED"
+                flash_timer = time.time() + 2
+            elif key == ord('C'):
+                settings.copy_editing_pattern()
+                flash_msg = f"COPIED PATTERN {settings.editing_pattern_idx}"
+                flash_timer = time.time() + 2
+            elif key == ord('V'):
+                flash_msg = "PASTED PATTERN" if settings.paste_editing_pattern() else "COPY A PATTERN FIRST"
+                flash_timer = time.time() + 2
+            elif key == ord('x'):
+                enabled = settings.toggle_song_mode()
+                flash_msg, flash_timer = ("SONG MODE ON" if enabled else "SONG MODE OFF"), time.time() + 2
+            elif key == ord('j'):
+                settings.append_editing_to_song()
+                flash_msg, flash_timer = f"CHAIN: {'-'.join(map(str, settings.song_chain))}", time.time() + 2
+            elif key == ord('k'):
+                settings.remove_last_song_pattern()
+                flash_msg, flash_timer = f"CHAIN: {'-'.join(map(str, settings.song_chain)) or 'EMPTY'}", time.time() + 2
+            elif key in [ord(str(index)) for index in settings.patterns if 1 <= index <= 9]:
                 pat_idx = int(chr(key))
                 settings.editing_pattern_idx = pat_idx
                 flash_msg = f"EDITING PATTERN {pat_idx}"
                 flash_timer = time.time() + 1
             
             elif key in [10, 13, curses.KEY_ENTER]: # ENTER -> Queue
-                 settings.queued_pattern_idx = settings.editing_pattern_idx
+                 settings.queue_editing_pattern()
                  flash_msg = f"QUEUED PATTERN {settings.editing_pattern_idx}"
                  flash_timer = time.time() + 2
                  
-            elif key in [127, curses.KEY_BACKSPACE]: # Backspace -> Clear
+            elif view_mode == "SEQUENCER" and key in [127, curses.KEY_BACKSPACE]: # Backspace -> Clear
                  settings.clear_editing_pattern()
                  flash_msg = f"PATTERN {settings.editing_pattern_idx} CLEARED"
                  flash_timer = time.time() + 2

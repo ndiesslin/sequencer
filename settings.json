@@ -9,155 +9,2240 @@
   "_nth_notes": 2,
   "_steps": 16,
   "_swing": 0.5,
-  "_synths": {
-    "synth_1": {
-      "effects": {
-        "echo": "0.5 0.3 450 0.1",
-        "vol": "0.25",
-        "tremolo": "10 40"
+  "_song_chain": [],
+  "_song_mode": false,
+  "patterns": {
+    "1": {
+      "synths": {
+        "synth_1": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.25",
+            "tremolo": "10 40"
+          },
+          "enabled": true,
+          "sequence": [
+            "100+200",
+            "C3",
+            200,
+            100,
+            "",
+            "C#2",
+            "200+150",
+            125,
+            "%-15",
+            "",
+            "E2",
+            "",
+            "A2+G3",
+            "",
+            "D3",
+            "F#3"
+          ],
+          "type": "triangle",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "synth_2": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.15"
+          },
+          "enabled": true,
+          "sequence": [
+            "G4",
+            "G4",
+            "G4",
+            "",
+            "G4",
+            "C3",
+            "G4",
+            "B4",
+            "G4",
+            "",
+            "B4",
+            "B4",
+            "",
+            "D4",
+            "F4",
+            "F#4"
+          ],
+          "type": "sine",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
       },
-      "enabled": true,
-      "sequence": [
-        "100+200",
-        "C3",
-        200,
-        100,
-        "",
-        "C#2",
-        "200+150",
-        125,
-        "%-15",
-        "",
-        "E2",
-        "",
-        "A2+G3",
-        "",
-        "D3",
-        "F#3"
-      ],
-      "type": "triangle"
+      "samples": {
+        "clap": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "hihat": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "kick": {
+          "effects": {
+            "vol": "0.5",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            1,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "snare": {
+          "effects": {
+            "vol": "1",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
+      },
+      "automation": {
+        "global": {}
+      }
     },
-    "synth_2": {
-      "effects": {
-        "echo": "0.5 0.3 450 0.1",
-        "vol": "0.15"
+    "2": {
+      "synths": {
+        "synth_1": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.25",
+            "tremolo": "10 40"
+          },
+          "enabled": true,
+          "sequence": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "triangle",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "synth_2": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.15"
+          },
+          "enabled": true,
+          "sequence": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "sine",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
       },
-      "enabled": true,
-      "sequence": [
-        "G4",
-        "G4",
-        "G4",
-        "",
-        "G4",
-        "C3",
-        "G4",
-        "B4",
-        "G4",
-        "",
-        "B4",
-        "B4",
-        "",
-        "D4",
-        "F4",
-        "F#4"
-      ],
-      "type": "sine"
-    }
-  },
-  "samples": {
-    "clap": {
-      "effects": {
-        "vol": "1"
+      "samples": {
+        "clap": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "hihat": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "kick": {
+          "effects": {
+            "vol": "0.5",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "snare": {
+          "effects": {
+            "vol": "1",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
       },
-      "sequence": [
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0
-      ]
+      "automation": {
+        "global": {}
+      }
     },
-    "hihat": {
-      "effects": {
-        "vol": "1"
+    "3": {
+      "synths": {
+        "synth_1": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.25",
+            "tremolo": "10 40"
+          },
+          "enabled": true,
+          "sequence": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "triangle",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "synth_2": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.15"
+          },
+          "enabled": true,
+          "sequence": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "sine",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
       },
-      "sequence": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ]
+      "samples": {
+        "clap": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "hihat": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "kick": {
+          "effects": {
+            "vol": "0.5",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "snare": {
+          "effects": {
+            "vol": "1",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
+      },
+      "automation": {
+        "global": {}
+      }
     },
-    "kick": {
-      "effects": {
-        "vol": "0.5",
-        "pitch": "-1000"
+    "4": {
+      "synths": {
+        "synth_1": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.25",
+            "tremolo": "10 40"
+          },
+          "enabled": true,
+          "sequence": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "triangle",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "synth_2": {
+          "effects": {
+            "echo": "0.5 0.3 450 0.1",
+            "vol": "0.15"
+          },
+          "enabled": true,
+          "sequence": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "sine",
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
       },
-      "sequence": [
-        1,
-        1,
-        1,
-        0,
-        0,
-        1,
-        1,
-        0,
-        1,
-        0,
-        1,
-        0,
-        1,
-        0,
-        1,
-        0
-      ]
-    },
-    "snare": {
-      "effects": {
-        "vol": "1",
-        "pitch": "-1000"
+      "samples": {
+        "clap": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "hihat": {
+          "effects": {
+            "vol": "1"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "kick": {
+          "effects": {
+            "vol": "0.5",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        },
+        "snare": {
+          "effects": {
+            "vol": "1",
+            "pitch": "-1000"
+          },
+          "sequence": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "step_params": [
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            },
+            {
+              "probability": 1.0,
+              "velocity": 1.0
+            }
+          ],
+          "automation": {}
+        }
       },
-      "sequence": [
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0
-      ]
+      "automation": {
+        "global": {}
+      }
     }
   }
 }

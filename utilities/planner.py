@@ -1,12 +1,8 @@
 import json
-import inquirer
 from utilities.settings import Settings
 
 # Get settings class
 settings = Settings()
-
-# Get our samples available to edit
-samples = Settings().samples
 
 # def main_screen_prompt():
 #   main_screen = [
@@ -23,6 +19,7 @@ samples = Settings().samples
 
 # NOTE: Here is where we will plan to get settings and sequence imputs to rewrite settings file.
 def sample_prompt(samples):
+  import inquirer
   question_sample = [
     inquirer.List(
       'sample',
@@ -37,6 +34,7 @@ def sample_prompt(samples):
 
 # Get sequence for selected sample
 def sequence_prompt(sample_sequence):
+  import inquirer
   sample_sequence_with_values = []
   sample_sequence_default_values = []
   for index, step in enumerate(sample_sequence):
@@ -89,8 +87,7 @@ def prompt_loop() :
   write_sequence(sample_sequence, sequence, sample_to_edit)
 
   # Recall function
+  return prompt_loop()
+
+if __name__ == '__main__':
   prompt_loop()
-
-prompt_loop()
-
-# Got back to start

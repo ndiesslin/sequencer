@@ -39,9 +39,11 @@ def note_to_freq(note):
         return 0.0
         
     try:
-        # Extract octave
-        octave = int(note[-1])
-        name = note[:-1]
+        match = re.fullmatch(r"([A-G]#?)(-?\d+)", str(note))
+        if not match:
+            raise ValueError("not a note name")
+        name, octave_text = match.groups()
+        octave = int(octave_text)
         
         index = NOTES.index(name)
         
@@ -64,3 +66,4 @@ def note_to_freq(note):
              return float(note)
         except:
              return 0.0
+import re

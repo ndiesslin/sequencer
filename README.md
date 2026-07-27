@@ -30,6 +30,17 @@ A terminal-based music sequencer built in Python. Edit patterns, tweak effects, 
 - `numpy` (DSP effects)
 - `curses` (Standard library)
 
+Install the Python dependencies in an isolated environment:
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -e .
+```
+
+On Debian/Ubuntu, install the PortAudio development package first if PyAudio needs
+to compile: `sudo apt install portaudio19-dev python3-dev`.
+
 ## Usage
 
 To start the sequencer with the interactive TUI:
@@ -44,11 +55,15 @@ python3 tui.py
 *   **Switch Editing View**: `1` `2` `3` `4` (Switch between patterns 1-4)
 *   **Queue Pattern**: `ENTER` (Queues currently editing pattern to play next)
 *   **Clear Pattern**: `BACKSPACE` (Clears all notes in current pattern)
+*   **Copy / Paste Pattern**: `C` / `V` (Copies a complete pattern, including its sound settings)
+*   **Reload Saved File**: `R` (Reloads `settings.json` deliberately; playback never reloads it mid-step)
+*   **Song Mode**: `J` adds the editing pattern to the song chain, `K` removes its final item, and `X` toggles playback of the chain. The chain loops at pattern boundaries.
 
 ### 🎹 Sequencer View
 *   **Navigation**: `ARROWS` to move cursor.
 *   **Toggle Step**: `SPACE`
 *   **Edit Note**: `[` / `]` to change pitch, `{` / `}` to change octave (Synths only).
+*   **Chance / Velocity**: `p` / `o` cycle the selected step's trigger chance; `v` / `b` cycle its velocity.
 *   **Mute Track**: `M`
 *   **Solo Track**: `L`
 
@@ -57,6 +72,7 @@ python3 tui.py
 *   **Adjust Value**: `[` / `]`
 *   **Switch Waveform**: Select `Type` column and use `[` / `]` (Saw, Square, Sine, Triangle).
 *   **Mute/Solo**: `M` / `L`
+*   **Automation**: Select `Vol` or `Pitch`, then press `R` while playing to record a keyframe at the current step. `BACKSPACE` erases it. Keyframes override that effect only at their recorded step.
 
 ### 🌍 Global Controls
 *   **Save Settings**: `S` (Saves to `settings.json`)
@@ -73,8 +89,8 @@ python3 sequence_player.py
 
 ## To add more sounds
 - Add your sample file in the samples folder
-  - mp3 playback should be a little faster since the files are more compressed, but feel free to try other file types
-- Add you sample file name and settings in the settings.json file
+  - WAV files must currently be 16-bit PCM; stereo files are downmixed safely to mono.
+- Add the sample name and settings in the active pattern in `settings.json`. It automatically appears in the TUI after reload.
 
 ## Sound effects
 All sound effects are based on sox [checkout the sox documentation for more info](http://sox.sourceforge.net/sox.html)
