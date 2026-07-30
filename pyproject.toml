@@ -12,5 +12,9 @@ dependencies = ["numpy>=1.24", "PyAudio>=0.2.14"]
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 
+[tool.setuptools]
+py-modules = ["sequence_player", "sequence_planner", "tui"]
+packages = ["utilities"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
