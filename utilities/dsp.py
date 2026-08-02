@@ -101,6 +101,8 @@ def apply_pitch_speed(audio, speed_factor):
     Resample audio to change speed and pitch.
     speed_factor > 1.0 = faster and higher pitch
     """
+    if speed_factor <= 0:
+        raise ValueError("speed_factor must be positive")
     if speed_factor == 1.0:
         return audio
         

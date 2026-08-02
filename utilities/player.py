@@ -1,5 +1,5 @@
 import numpy as np
-import threading
+import random
 from utilities import controls, dsp
 
 # Queue to merge all of our sounds together in each step and play
@@ -32,16 +32,15 @@ class player_queue:
     
     # Global Effects
     global_effects = self.settings.global_effects
-    # Pitch/Speed
-    if 'pitch' in global_effects:
+    # Pitch and speed are independent controls.  Apply either when present.
+    if 'pitch' in global_effects or 'speed' in global_effects:
         try:
-            pitch_cents = float(global_effects['pitch'])
+            pitch_cents = float(global_effects.get('pitch', 0))
             speed = dsp.sox_pitch_to_speed(pitch_cents)
-            if 'speed' in global_effects:
-                speed *= float(global_effects['speed'])
+            speed *= float(global_effects.get('speed', 1))
             mixed = dsp.apply_pitch_speed(mixed, speed)
-        except:
-             pass
+        except (TypeError, ValueError):
+            pass
     
     # Clip to -1.0 to 1.0 to avoid distortion
     mixed = np.clip(mixed, -1.0, 1.0)
@@ -65,7 +64,7 @@ class sample_player:
     
     mixed_sample = np.zeros(0, dtype=np.float32)
 
-    for sample_name in current_step_samples:
+    for sample_name, velocity in current_step_samples:
         # Load sample
         sample_config = self.settings.samples.get(sample_name)
         effects = sample_config.get('effects', {})
@@ -77,7 +76,7 @@ class sample_player:
         except:
             vol = 1.0
             
-        sample_data = self.audio_engine.load_sample(f'./samples/{sample_name}.wav', volume=vol)
+        sample_data = self.audio_engine.load_sample(f'./samples/{sample_name}.wav', volume=vol * velocity)
         
         # Apply Pitch (sox pitch)
         if 'pitch' in effects:
@@ -87,9 +86,20 @@ class sample_player:
              except:
                  pass
         
-        # Apply Echo?
-        # Note: In original code, sample effects were complex. 
-        # We'll just stick to vol and pitch for now unless requested.
+        # Samples support the same time-based effects exposed by the mixer.
+        if 'tremolo' in effects:
+            try:
+                speed_hz, depth = map(float, str(effects['tremolo']).split()[:2])
+                sample_data = dsp.apply_tremolo(sample_data, speed_hz, depth, self.audio_engine.sample_rate)
+            except (TypeError, ValueError):
+                pass
+        if 'echo' in effects:
+            try:
+                gain_in, gain_out, delay_ms, decay = map(float, str(effects['echo']).split()[:4])
+                sample_data = dsp.apply_echo(sample_data, gain_in, gain_out, delay_ms, decay,
+                                              self.audio_engine.sample_rate)
+            except (TypeError, ValueError):
+                pass
         
         # Mix
         if len(mixed_sample) == 0:
@@ -125,10 +135,12 @@ class sample_player:
       if sample in muted: continue
       if solo and solo != sample: continue
       
-      sample_on = samples.get(sample)['sequence'][step]
+      config = samples.get(sample)
+      sample_on = config['sequence'][step]
+      params = config.get('step_params', [{}] * len(config['sequence']))[step]
 
-      if sample_on == 1:
-        on_samples.append(sample)
+      if sample_on == 1 and random.random() <= params.get('probability', 1.0):
+        on_samples.append((sample, params.get('velocity', 1.0)))
 
     return on_samples
 
@@ -147,9 +159,10 @@ class synth_player:
     synth = self.synth
     enabled = synth.get('enabled')
     sequence_note = synth.get('sequence')[step]
+    params = synth.get('step_params', [{}] * len(synth['sequence']))[step]
 
     # If we have no frequency or not enabled return empty list
-    if sequence_note == "" or enabled != True:
+    if sequence_note == "" or enabled != True or random.random() > params.get('probability', 1.0):
       return np.zeros(0, dtype=np.float32)
 
     synth_type = synth.get('type')
@@ -176,7 +189,7 @@ class synth_player:
     except:
         vol = 0.5 
         
-    vol = vol / len(freqs)
+    vol = (vol * params.get('velocity', 1.0)) / len(freqs)
 
     for f in freqs:
         wave = self.audio_engine.generate_waveform(synth_type, f, play_length, volume=vol)

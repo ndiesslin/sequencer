@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "terminal-sequencer"
+version = "0.1.0"
+description = "A terminal-based Python music sequencer"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "PyAudio>=0.2.14"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools]
+py-modules = ["sequence_player", "sequence_planner", "tui"]
+packages = ["utilities"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

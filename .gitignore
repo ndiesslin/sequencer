@@ -1,3 +1,7 @@
 # Ignore pycache
 __pycache__/
 *.py[cod]
+.venv/
+*.egg-info/
+*.log
+crash.log
